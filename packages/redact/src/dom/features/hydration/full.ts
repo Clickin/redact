@@ -257,7 +257,7 @@ export function adoptHostDom(fiber: Fiber, parent: Fiber): boolean {
     if (!cursor)
         return false;
     const tag = (fiber.type as string).toLowerCase();
-    const documentHeadParent = documentMetadataParent(fiber) || (cursor.p.nodeType === 9 && DOCUMENT_HEAD_TAGS.test(tag)
+    const documentHeadParent = (fiber.r!.c.nodeType === 9 ? documentMetadataParent(fiber) : null) || (cursor.p.nodeType === 9 && DOCUMENT_HEAD_TAGS.test(tag)
         ? (cursor.p as Document).head
         : null);
     const parentEl = cursor.p as Element;
